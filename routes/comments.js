@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
         query.limit(50);
         query.find().then(function (results) {
             res.render('comments', {
-                title: process.env.SITE_NAME + 'Comments',
+                title: process.env.SITE_NAME + ' Comments',
                 comment_list: results
             });
         }, function (err) {
