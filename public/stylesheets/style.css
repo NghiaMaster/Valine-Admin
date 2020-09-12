@@ -1,11 +1,13 @@
 body {
     font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Droid Sans,Helvetica Neue,sans-serif;
     font-size: 1rem;
+    background: #212121;
+    color: #fff;
 }
 
 a {
     text-decoration: none;
-    color: #3eb0ef;
+    color: #ffd866;
 }
 
 .footer {
@@ -15,6 +17,7 @@ a {
 .title {
     font-weight: 200;
     font-size: 1.5rem;
+    color: #fff;
 }
 
 ul {
@@ -39,7 +42,7 @@ li {
 
 @media screen and (max-width:768px) {
     .comment-main {
-        padding: 1rem;
+        padding: 1rem !important;
     }
 }
 
@@ -53,7 +56,7 @@ li {
 
 .vhead a , .vhead #nick {
     font-weight: bolder;
-    color: #333;
+    color: #a9a4a4;
 }
 
 .spacer {
@@ -106,7 +109,7 @@ li {
     padding: 1rem 2rem;
     width: 320px;
     border: 1px solid #dae1e3;
-    background: #f8fbfd;
+    background: #1c1c1c;
     border-radius: 5px;
     text-align: left;
 }
@@ -151,10 +154,10 @@ li {
 }
 
 .red {
-    color: #ee1000;
+    color: #ff0000;
+    font-weight: bold;
 }
 
 .blue{
-    padding-left: 9px;
     color: #33b1ff;
 }
