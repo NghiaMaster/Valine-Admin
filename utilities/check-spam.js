@@ -8,14 +8,14 @@ const akismetClient = akismet.client({
 
 exports.checkSpam = (comment, ip)=> {
     if (process.env.AKISMET_KEY === 'MANUAL_REVIEW') {
-        console.log('已使用人工审核模式，评论审核后才会发表~');
+        console.log('Chế độ đánh giá thủ công đang được sử dụng, nhận xét sẽ được đăng sau khi xem xét ~');
         comment.setACL(new AV.ACL({"*":{"read":false}}));
         comment.set('isSpam', true);
         comment.save();
         return;
     }
     akismetClient.verifyKey(function(err, valid) {
-        if (err) console.log('Akismet key 异常:', err.message);
+        if (err) console.log('Akismet key Bất thường:', err.message);
         if (valid) {
             // TODO(1) 这里有缺陷
             comment.set('ip', ip);
@@ -31,9 +31,9 @@ exports.checkSpam = (comment, ip)=> {
                 comment_content : comment.get('comment'),
                 // is_test : true // Default value is false
             }, function(err, spam) {
-                if (err) console.log (`垃圾评论检测出错！${err}`);
+                if (err) console.log (`Phát hiện Spam ${err}`);
                 if (spam) {
-                    console.log('逮到一只垃圾评论，烧死它！用文火~');
+                    console.log('Bắt một bình luận spam và đốt nó cho chết! Dùng lửa nhẹ ~');
                     comment.set('isSpam', true);
                     comment.setACL(new AV.ACL({"*":{"read":false}}));
                     comment.save();
@@ -42,11 +42,11 @@ exports.checkSpam = (comment, ip)=> {
                     comment.set('isSpam', false);
                     comment.setACL(new AV.ACL({"*":{"read":true}}));
                     comment.save();
-                    console.log('垃圾评论检测完成，放行~');
+                    console.log('Phát hiện thư rác hoàn tất, bỏ qua ~');
                 }
             });
         }
-        else console.log('Akismet key 异常!');
+        else console.log('Akismet key Bất thường!');
     });
 };
 exports.submitSpam = (comment)=> {
@@ -54,7 +54,7 @@ exports.submitSpam = (comment)=> {
         return;
     }
     akismetClient.verifyKey(function(err, valid) {
-        if (err) console.log('Akismet key 异常:', err.message);
+        if (err) console.log('Akismet key Bất thường:', err.message);
         if (valid) {
             let ipAddr = comment.get('ip');
             akismetClient.submitSpam({
@@ -70,11 +70,11 @@ exports.submitSpam = (comment)=> {
                 // is_test : true // Default value is false
             }, function(err) {
                 if (!err) {
-                    console.log('垃圾评论已经提交!');
+                    console.log('Bình luận Spam đã được gửi');
                 }
             });
         }
-        else console.log('Akismet key 异常!');
+        else console.log('Akismet key Bất thường!');
     });
 };
 exports.submitHam = (comment)=> {
@@ -82,7 +82,7 @@ exports.submitHam = (comment)=> {
         return;
     }
     akismetClient.verifyKey(function(err, valid) {
-        if (err) console.log('Akismet key 异常:', err.message);
+        if (err) console.log('Akismet key Bất thường:', err.message);
         if (valid) {
             let ipAddr = comment.get('ip');
             akismetClient.submitHam({
@@ -98,10 +98,10 @@ exports.submitHam = (comment)=> {
                 // is_test : true // Default value is false
             }, function(err) {
                 if (!err) {
-                    console.log('评论已经标记为非垃圾!');
+                    console.log('Bình luận đã được đánh dấu là không phải Spam');
                 }
             });
         }
-        else console.log('Akismet key 异常!');
+        else console.log('Akismet key Bất thường!');
     });
 };

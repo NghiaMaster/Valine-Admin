@@ -89,7 +89,7 @@ app.use(function(err, req, res, next) {
     console.error(err.stack || err);
   }
   if (req.timedout) {
-    console.error('请求超时: url=%s, timeout=%d, 请确认方法执行耗时很长，或没有正确的 response 回调。', req.originalUrl, err.timeout);
+    console.error('The comment on the request timed out: url=%s, timeout=%d, Please confirm that the method takes a long time to execute, or there is no correct response callback.', req.originalUrl, err.timeout);
   }
   res.status(statusCode);
   // 默认不输出异常详情

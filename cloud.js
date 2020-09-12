@@ -18,10 +18,10 @@ function sendNotification(currentComment, defaultIp) {
     let rid =currentComment.get('pid') || currentComment.get('rid');
 
     if (!rid) {
-        console.log("这条评论没有 @ 任何人");
+        console.log("This comment does not @ anyone");
         return;
     } else if (currentComment.get('isSpam')) {
-        console.log('评论未通过审核，通知邮件暂不发送');
+        console.log('The comment is not approved, and the notification email will not be sent temporarily');
         return;
     }
 
@@ -30,11 +30,11 @@ function sendNotification(currentComment, defaultIp) {
         if (parentComment.get('mail') && parentComment.get('mail') !== process.env.BLOGGER_EMAIL) {
             mail.send(currentComment, parentComment);
         } else {
-            console.log('被@者匿名，不会发送通知');
+            console.log('Anonymous by @, no notification will be sent');
         }
         
     }, function (error) {
-        console.warn('获取@对象失败！');
+        console.warn('Failed to get @object!');
     });
 }
 
@@ -58,7 +58,7 @@ AV.Cloud.define('resend_mails', function(req) {
             }
             resolve(count);
         }).then((count)=>{
-            console.log(`昨日${count}条未成功发送的通知邮件处理完毕！`);
+            console.log(`Yesterday ${count} unsuccessful notification emails have been processed!`);
         }).catch(()=>{
 
         });
@@ -67,7 +67,6 @@ AV.Cloud.define('resend_mails', function(req) {
 
 AV.Cloud.define('self_wake', function(req) {
     request(process.env.ADMIN_URL, function (error, response, body) {
-        console.log('自唤醒任务执行成功，响应状态码为:', response && response.statusCode);
+        console.log('The self-wake-up task is executed successfully, and the response status code is:', response && response.statusCode);
       });
 });
-
