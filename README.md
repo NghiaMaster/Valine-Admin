@@ -5,7 +5,7 @@ Valine Admin is an extension and enhancement of [Valine's Comment system](https:
 [Comment on online demos and related functional tests](https://panjunwen.github.io/Valine/)
 Please refer to the [latest version of the blog](https://deserts.io/valine-admin-document/) for installation tutorial .
 
-## 快速部署
+## Cloud engine "one-click" deployment
 
  1. On the [Leancloud](https://leancloud.cn/dashboard/#/apps) cloud engine setting interface, fill in the code base and save it：https://github.com/DesertsP/Valine-Admin.git
 
